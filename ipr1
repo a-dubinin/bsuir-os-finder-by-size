@@ -1,15 +1,15 @@
 #!/bin/bash
 
-# Программа поиска в каталоге файлов заданного диапазона размеров.
-# Разработчик - Дубинин А. В. (http://dubinin.net)
-# 11.02.2017
+# The files search script of a specified range of sizes.
+# Developed by Aleksandr Dubinin (http://dubinin.net)
+# 11th of February 2017
 
-# Вывод сообщений об ошибках
+# Displaying error messages
 if [ ! -d $1 ]; then
     echo "$0: Error opening dir: $1" 1>&2
 elif [ ! -r $1 ]; then
     echo "$0: Access error: $1" 1>&2
-# Поиск файлов
+# Files search
 else
     FIND_CMD="find $1 -type f"
     $FIND_CMD -size +$2c -size -$3c -printf "%h, %f, %s\n" 1>$4
