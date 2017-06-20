@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Программа поиска в каталоге файлов заданного диапазона размеров.
+# Разработчик - Дубинин А. В.
+# 11.02.2017
+
+# Вывод сообщений об ошибках
+if [ ! -d $1 ]; then
+    echo "$0: Error opening dir: $1" 1>&2
+elif [ ! -r $1 ]; then
+    echo "$0: Access error: $1" 1>&2
+# Поиск файлов
+else
+    FIND_CMD="find $1 -type f"
+    $FIND_CMD -size +$2c -size -$3c -printf "%h, %f, %s\n" 1>$4
+    echo "Number of scanned files:"
+    $FIND_CMD | wc -l
+fi
+exit
+
